@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kimuntu Rising | From Survival to Significance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9922A;
+    --gold-light: #E8B84B;
+    --earth: #3D2B1F;
+    --earth-mid: #5C3D2E;
+    --cream: #F7F0E6;
+    --cream-dark: #EDE3D4;
+    --green: #2E5C3E;
+    --green-light: #4A8C63;
+    --white: #FDFAF6;
+    --text-dark: #1A1209;
+    --text-mid: #4A3728;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5vw;
+    background: rgba(253,250,246,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,146,42,0.15);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(61,43,31,0.12); }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; font-weight: 900;
+    color: var(--earth);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--earth-mid);
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--white) !important;
+    padding: 0.55rem 1.4rem; border-radius: 50px;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--earth);
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative; overflow: hidden;
+    padding: 0 5vw;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(201,146,42,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(46,92,62,0.25) 0%, transparent 50%);
+  }
+  .hero-pattern {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 52%; 
+    background: 
+      linear-gradient(135deg, var(--earth-mid) 25%, transparent 25%) -30px 0,
+      linear-gradient(225deg, var(--earth-mid) 25%, transparent 25%) -30px 0,
+      linear-gradient(315deg, var(--earth-mid) 25%, transparent 25%),
+      linear-gradient(45deg,  var(--earth-mid) 25%, transparent 25%);
+    background-size: 60px 60px;
+    background-color: #2A1D14;
+    opacity: 0.5;
+  }
+  .hero-img-wrap {
+    position: absolute; top: 0; right: 0; bottom: 0; width: 50%;
+    overflow: hidden;
+  }
+  /* gradient overlay over img side */
+  .hero-img-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, var(--earth) 0%, transparent 30%),
+                linear-gradient(180deg, rgba(61,43,31,0.4) 0%, transparent 60%);
+  }
+  /* Unsplash-style photo via CSS – placeholder colored panel */
+  .hero-visual {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #6B4226 0%, #3D2B1F 35%, #2E5C3E 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem; opacity: 0.25;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 8rem 0 6rem;
+    animation: fadeUp 1s ease both;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(201,146,42,0.2);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 2rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 900; line-height: 1.08;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--gold-light);
+    display: block;
+  }
+  .hero p {
+    font-size: 1.05rem; color: rgba(247,240,230,0.75);
+    max-width: 460px; line-height: 1.75; margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block; padding: 0.85rem 2.2rem;
+    background: var(--gold); color: var(--earth); font-weight: 700;
+    border-radius: 50px; text-decoration: none; font-size: 0.95rem;
+    transition: all 0.25s; letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,146,42,0.4); }
+  .btn-outline {
+    display: inline-block; padding: 0.85rem 2.2rem;
+    border: 2px solid rgba(247,240,230,0.4); color: var(--cream);
+    border-radius: 50px; text-decoration: none; font-size: 0.95rem;
+    transition: all 0.25s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 3.5rem;
+    padding-top: 2.5rem; border-top: 1px solid rgba(247,240,230,0.15);
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900; color: var(--gold-light);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.78rem; color: rgba(247,240,230,0.6); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 6rem 5vw; }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800; line-height: 1.15;
+    color: var(--earth); margin-bottom: 1.2rem;
+  }
+  .section-sub {
+    font-size: 1.05rem; color: var(--text-mid);
+    max-width: 560px; line-height: 1.75;
+  }
+
+  /* ── PROBLEM ── */
+  .problem-section { background: var(--cream); }
+  .problem-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center; margin-top: 3.5rem;
+  }
+  .problem-visual {
+    background: var(--earth);
+    border-radius: 20px; overflow: hidden; aspect-ratio: 4/5;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .problem-visual::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(61,43,31,0.85) 100%);
+  }
+  .problem-visual-inner {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #8B5E3C 0%, #3D2B1F 60%, #2E5C3E 100%);
+    display: flex; align-items: flex-end; justify-content: center;
+    padding: 2rem;
+  }
+  .visual-quote {
+    position: relative; z-index: 2;
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 1.3rem;
+    color: var(--cream); text-align: center; line-height: 1.6;
+  }
+  .challenge-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .challenge-item {
+    display: flex; gap: 1.1rem; align-items: flex-start;
+    padding: 1.2rem 1.5rem; background: var(--white);
+    border-radius: 12px; border-left: 3px solid var(--gold);
+    box-shadow: 0 2px 12px rgba(61,43,31,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .challenge-item:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(61,43,31,0.1); }
+  .challenge-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .challenge-item strong { font-size: 0.9rem; font-weight: 600; color: var(--earth); display: block; margin-bottom: 0.2rem; }
+  .challenge-item p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.5; }
+
+  /* ── MODEL ── */
+  .model-section { background: var(--white); }
+  .model-steps {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; margin-top: 3.5rem; position: relative;
+  }
+  .model-steps::before {
+    content: '';
+    position: absolute; top: 4.5rem; left: 16%; right: 16%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--green-light), var(--gold));
+    z-index: 0;
+  }
+  .model-card {
+    background: var(--cream);
+    border-radius: 20px; padding: 2.5rem 2rem;
+    position: relative; z-index: 1;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .model-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(61,43,31,0.12); }
+  .level-num {
+    width: 4rem; height: 4rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900;
+    margin: 0 auto 1.8rem; position: relative;
+    box-shadow: 0 0 0 8px var(--cream);
+  }
+  .level-1 .level-num { background: var(--earth); color: var(--gold-light); }
+  .level-2 .level-num { background: var(--gold); color: var(--earth); }
+  .level-3 .level-num { background: var(--green); color: var(--cream); }
+  .model-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; color: var(--earth);
+    margin-bottom: 0.6rem; text-align: center;
+  }
+  .model-card .model-subtitle {
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em;
+    text-align: center; margin-bottom: 1.2rem; font-weight: 600;
+  }
+  .level-1 .model-subtitle { color: var(--earth-mid); }
+  .level-2 .model-subtitle { color: var(--gold); }
+  .level-3 .model-subtitle { color: var(--green); }
+  .model-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+  .model-card ul li {
+    font-size: 0.88rem; color: var(--text-mid); padding-left: 1.2rem;
+    position: relative; line-height: 1.5;
+  }
+  .model-card ul li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--gold); font-size: 0.85rem;
+  }
+
+  /* ── PROGRAMS ── */
+  .programs-section { background: var(--earth); }
+  .programs-section .section-title { color: var(--cream); }
+  .programs-section .section-label { color: var(--gold-light); }
+  .programs-section .section-sub { color: rgba(247,240,230,0.7); }
+  .programs-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .program-card {
+    background: rgba(247,240,230,0.06);
+    border: 1px solid rgba(247,240,230,0.1);
+    border-radius: 16px; padding: 2rem;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .program-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .program-card:hover { background: rgba(247,240,230,0.1); border-color: rgba(201,146,42,0.3); transform: translateY(-4px); }
+  .program-card:hover::before { transform: scaleX(1); }
+  .program-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 900; color: rgba(201,146,42,0.2);
+    line-height: 1; margin-bottom: 0.8rem;
+  }
+  .program-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+  .program-focus {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--gold); font-weight: 600; margin-bottom: 1rem;
+  }
+  .program-card p { font-size: 0.9rem; color: rgba(247,240,230,0.7); line-height: 1.65; }
+  .program-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
+  .tag {
+    font-size: 0.72rem; padding: 0.3rem 0.75rem;
+    background: rgba(201,146,42,0.12); color: var(--gold-light);
+    border-radius: 50px; border: 1px solid rgba(201,146,42,0.25);
+  }
+
+  /* ── IMPACT ── */
+  .impact-section { background: var(--cream-dark); }
+  .impact-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .impact-card {
+    background: var(--white); border-radius: 16px; padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(61,43,31,0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .impact-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(61,43,31,0.12); }
+  .impact-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+  .impact-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem; font-weight: 900; color: var(--earth);
+    line-height: 1; margin-bottom: 0.4rem;
+  }
+  .impact-card h3 span { color: var(--gold); }
+  .impact-card p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.5; }
+
+  /* ── WHO WE SERVE ── */
+  .serve-section { background: var(--white); }
+  .serve-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .serve-card {
+    border: 2px solid var(--cream-dark);
+    border-radius: 16px; padding: 2rem 1.5rem;
+    transition: border-color 0.3s, transform 0.3s;
+    text-align: center;
+  }
+  .serve-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .serve-emoji { font-size: 2.5rem; margin-bottom: 1rem; }
+  .serve-card h3 { font-size: 1rem; font-weight: 700; color: var(--earth); margin-bottom: 0.5rem; }
+  .serve-card p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; }
+
+  /* ── QUOTE ── */
+  .quote-section {
+    background: linear-gradient(135deg, var(--green) 0%, #1A3D28 100%);
+    padding: 5rem 5vw; text-align: center;
+  }
+  .quote-section blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-style: italic; color: var(--cream);
+    max-width: 800px; margin: 0 auto 1.5rem;
+    line-height: 1.55;
+  }
+  .quote-section cite { font-size: 0.85rem; color: var(--gold-light); letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* ── PILOT ── */
+  .pilot-section { background: var(--cream); }
+  .pilot-inner {
+    background: var(--earth); border-radius: 24px;
+    padding: 3.5rem; display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start; margin-top: 3rem;
+  }
+  .pilot-inner .section-title { color: var(--cream); font-size: 2rem; }
+  .pilot-inner .section-label { color: var(--gold-light); }
+  .pilot-inner p { color: rgba(247,240,230,0.75); line-height: 1.75; font-size: 0.95rem; }
+  .pilot-phases { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem; }
+  .phase-item {
+    display: flex; align-items: center; gap: 1rem;
+    background: rgba(247,240,230,0.07);
+    border-radius: 10px; padding: 0.9rem 1.2rem;
+    border: 1px solid rgba(247,240,230,0.1);
+  }
+  .phase-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .phase-item span { font-size: 0.88rem; color: rgba(247,240,230,0.85); line-height: 1.4; }
+  .budget-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  .budget-table th {
+    text-align: left; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); padding: 0.6rem 1rem; background: rgba(201,146,42,0.1);
+    border-bottom: 1px solid rgba(201,146,42,0.2);
+  }
+  .budget-table td {
+    padding: 0.75rem 1rem; font-size: 0.88rem;
+    color: rgba(247,240,230,0.85); border-bottom: 1px solid rgba(247,240,230,0.06);
+  }
+  .budget-table tr:last-child td {
+    color: var(--gold-light); font-weight: 700; font-size: 0.95rem;
+    border-top: 1px solid rgba(201,146,42,0.3); border-bottom: none;
+  }
+  .budget-table td:last-child { text-align: right; }
+  .usd-note {
+    font-size: 0.8rem; color: rgba(247,240,230,0.5); margin-top: 0.8rem;
+    text-align: right; font-style: italic;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--gold);
+    padding: 5rem 5vw; text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900;
+    color: var(--earth); margin-bottom: 1rem; line-height: 1.15;
+  }
+  .cta-section p { font-size: 1.05rem; color: rgba(61,43,31,0.75); max-width: 520px; margin: 0 auto 2.5rem; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-dark {
+    display: inline-block; padding: 0.9rem 2.4rem;
+    background: var(--earth); color: var(--cream);
+    border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.95rem;
+    transition: all 0.25s;
+  }
+  .btn-dark:hover { background: #1A1209; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(61,43,31,0.3); }
+  .btn-white {
+    display: inline-block; padding: 0.9rem 2.4rem;
+    background: transparent; border: 2px solid var(--earth);
+    color: var(--earth); border-radius: 50px; text-decoration: none;
+    font-weight: 600; font-size: 0.95rem; transition: all 0.25s;
+  }
+  .btn-white:hover { background: rgba(61,43,31,0.08); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0F0A06; padding: 4rem 5vw 2rem;
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+  }
+  .footer-brand .logo { font-size: 1.5rem; display: block; margin-bottom: 1rem; }
+  .footer-brand p { font-size: 0.88rem; color: rgba(247,240,230,0.45); line-height: 1.7; max-width: 280px; }
+  .footer-col h4 {
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--gold); margin-bottom: 1.2rem; font-weight: 600;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul li a {
+    text-decoration: none; font-size: 0.88rem; color: rgba(247,240,230,0.5);
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--gold-light); }
+  .footer-bottom {
+    background: #0F0A06; padding: 1.5rem 5vw;
+    border-top: 1px solid rgba(247,240,230,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8rem; color: rgba(247,240,230,0.3);
+  }
+  .footer-bottom span { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-img-wrap { display: none; }
+    .hero-pattern { display: none; }
+    .problem-grid, .model-steps, .programs-grid { grid-template-columns: 1fr; }
+    .impact-grid { grid-template-columns: repeat(2, 1fr); }
+    .serve-grid { grid-template-columns: repeat(2, 1fr); }
+    .pilot-inner { grid-template-columns: 1fr; gap: 2rem; }
+    footer { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 480px) {
+    .impact-grid, .serve-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+  }
+
+  /* ── STICKY DONATE BTN ── */
+  .sticky-donate {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 99;
+    background: var(--gold); color: var(--earth);
+    padding: 0.75rem 1.6rem; border-radius: 50px;
+    font-weight: 700; font-size: 0.88rem;
+    box-shadow: 0 8px 30px rgba(201,146,42,0.5);
+    text-decoration: none; transition: all 0.25s;
+    animation: fadeUp 1.5s ease both;
+  }
+  .sticky-donate:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 35px rgba(201,146,42,0.6); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="logo">Kimuntu<span> Rising</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#model">Our Model</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#pilot">Pilot</a></li>
+    <li><a href="#contact" class="nav-cta">Partner With Us</a></li>
+  </ul>
+</nav>
+
+<!-- STICKY DONATE -->
+<a href="#contact" class="sticky-donate">🌱 Support Us</a>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-img-wrap">
+    <div class="hero-visual"></div>
+  </div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🌍 Kigali, Rwanda — Est. 2026</div>
+    <h1>
+      From Survival<br>
+      <em>to Significance.</em>
+    </h1>
+    <p>Kimuntu Rising is a transformation engine — not a charity. We build self-reliant individuals and sustainable economic systems in Rwanda through mindset, skills, and enterprise.</p>
+    <div class="hero-btns">
+      <a href="#model" class="btn-primary">Discover Our Model</a>
+      <a href="#programs" class="btn-outline">View Programs</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Transformation Levels</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Core Programs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6mo</div>
+        <div class="stat-label">Pilot Duration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section reveal" id="problem">
+  <div class="section-label">The Challenge</div>
+  <div class="problem-grid">
+    <div>
+      <h2 class="section-title">Poverty managed,<br>not permanently reduced.</h2>
+      <p class="section-sub" style="margin-bottom:2.5rem;">In Rwanda, most development initiatives focus on short-term aid and basic skills training — leaving vulnerable people in cycles of dependency. Kimuntu Rising breaks that cycle permanently.</p>
+      <ul class="challenge-list">
+        <li class="challenge-item">
+          <div class="challenge-icon">🔗</div>
+          <div>
+            <strong>Continued Dependency</strong>
+            <p>Beneficiaries rely on external support with no path to independence</p>
+          </div>
+        </li>
+        <li class="challenge-item">
+          <div class="challenge-icon">📉</div>
+          <div>
+            <strong>No Market-Linked Training</strong>
+            <p>Skills programs disconnected from actual job market demands</p>
+          </div>
+        </li>
+        <li class="challenge-item">
+          <div class="challenge-icon">🧠</div>
+          <div>
+            <strong>Unaddressed Psychological Barriers</strong>
+            <p>Trauma, low confidence, and lack of purpose remain untreated</p>
+          </div>
+        </li>
+        <li class="challenge-item">
+          <div class="challenge-icon">🚶</div>
+          <div>
+            <strong>Zero Post-Training Follow-up</strong>
+            <p>Participants left without mentorship after initial training ends</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="problem-visual">
+      <div class="problem-visual-inner">
+        <p class="visual-quote">"Poverty is often managed rather than permanently reduced — we change that."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODEL -->
+<section class="model-section reveal" id="model">
+  <div style="text-align:center;">
+    <div class="section-label">Our Approach</div>
+    <h2 class="section-title" style="max-width:none;">The Kimuntu Rising<br>3-Level Transformation Model</h2>
+    <p class="section-sub" style="margin: 0 auto;">A structured, long-term framework that takes individuals from vulnerability to sustained economic independence.</p>
+  </div>
+  <div class="model-steps">
+    <div class="model-card level-1 reveal">
+      <div class="level-num">1</div>
+      <h3>Mindset Transformation</h3>
+      <div class="model-subtitle">Foundation</div>
+      <ul>
+        <li>Trauma healing and emotional resilience</li>
+        <li>Identity development and self-worth</li>
+        <li>Discipline, purpose, and goal-setting</li>
+        <li>Behavioral change coaching</li>
+      </ul>
+    </div>
+    <div class="model-card level-2 reveal">
+      <div class="level-num">2</div>
+      <h3>Skills Development</h3>
+      <div class="model-subtitle">Real Application</div>
+      <ul>
+        <li>Market-relevant vocational training</li>
+        <li>Digital skills for the modern economy</li>
+        <li>Apprenticeships with local businesses</li>
+        <li>Hands-on income-generating projects</li>
+      </ul>
+    </div>
+    <div class="model-card level-3 reveal">
+      <div class="level-num">3</div>
+      <h3>Economic Independence</h3>
+      <div class="model-subtitle">Systems Building</div>
+      <ul>
+        <li>Micro-enterprise incubation</li>
+        <li>Business mentorship and coaching</li>
+        <li>Market access facilitation</li>
+        <li>Performance tracking and follow-up</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs-section reveal" id="programs">
+  <div class="section-label">Core Programs</div>
+  <h2 class="section-title">Four Pillars of Change</h2>
+  <p class="section-sub">Each program builds on the last — creating a complete journey from inner transformation to community impact.</p>
+  <div class="programs-grid">
+    <div class="program-card">
+      <div class="program-num">01</div>
+      <h3>Rise Mind Program</h3>
+      <div class="program-focus">Focus: Personal Transformation</div>
+      <p>A deep-dive into the inner work. Participants undergo mindset and behavioral change coaching, trauma-informed support, and leadership development to rebuild identity and purpose.</p>
+      <div class="program-tags">
+        <span class="tag">Mindset Coaching</span>
+        <span class="tag">Trauma Healing</span>
+        <span class="tag">Leadership</span>
+      </div>
+    </div>
+    <div class="program-card">
+      <div class="program-num">02</div>
+      <h3>Skills-to-Income Program</h3>
+      <div class="program-focus">Focus: Employability & Income Creation</div>
+      <p>Market-driven vocational and digital skills training paired with real apprenticeships and practical income-generating projects linked to actual job market demand.</p>
+      <div class="program-tags">
+        <span class="tag">Vocational Skills</span>
+        <span class="tag">Digital Training</span>
+        <span class="tag">Apprenticeships</span>
+      </div>
+    </div>
+    <div class="program-card">
+      <div class="program-num">03</div>
+      <h3>Micro-Enterprise Incubation</h3>
+      <div class="program-focus">Focus: Business Creation & Sustainability</div>
+      <p>From idea to operating business. Participants receive startup support, business training, access to seed capital through group-based savings, and continuous mentorship.</p>
+      <div class="program-tags">
+        <span class="tag">Startup Support</span>
+        <span class="tag">Seed Capital</span>
+        <span class="tag">Mentorship</span>
+      </div>
+    </div>
+    <div class="program-card">
+      <div class="program-num">04</div>
+      <h3>Community Impact Network</h3>
+      <div class="program-focus">Focus: Long-Term Sustainability</div>
+      <p>Alumni become mentors. A peer support and opportunity-sharing ecosystem that sustains transformation beyond the program — creating lasting community-level change.</p>
+      <div class="program-tags">
+        <span class="tag">Peer Support</span>
+        <span class="tag">Alumni Network</span>
+        <span class="tag">Opportunity Hub</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT METRICS -->
+<section class="impact-section reveal" id="impact">
+  <div style="text-align:center;">
+    <div class="section-label">Expected Outcomes</div>
+    <h2 class="section-title">Measuring Real Change</h2>
+    <p class="section-sub" style="margin:0 auto 0.5rem;">Our KPIs are built around independence — not attendance numbers or training counts.</p>
+  </div>
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-icon">💼</div>
+      <h3>6<span>mo</span></h3>
+      <p>Target for participants to generate income after completing the program</p>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">🏪</div>
+      <h3>12<span>mo</span></h3>
+      <p>Milestone for measuring business survival and operational sustainability</p>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">📈</div>
+      <h3>↑ Inc</h3>
+      <p>Tracked average income growth per beneficiary with structured follow-up</p>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">👥</div>
+      <h3>Jobs</h3>
+      <p>Jobs created within communities by program graduates — from job seekers to job creators</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="serve-section reveal">
+  <div style="text-align:center; margin-bottom:0;">
+    <div class="section-label">Who We Serve</div>
+    <h2 class="section-title">Reaching the Most Vulnerable</h2>
+    <p class="section-sub" style="margin:0 auto;">We focus specifically on those overlooked by conventional development programs.</p>
+  </div>
+  <div class="serve-grid">
+    <div class="serve-card">
+      <div class="serve-emoji">🏙️</div>
+      <h3>Street-Connected Youth</h3>
+      <p>Young people living and working on the streets who need both immediate support and long-term pathways</p>
+    </div>
+    <div class="serve-card">
+      <div class="serve-emoji">🤝</div>
+      <h3>Orphans & Vulnerable Youth</h3>
+      <p>Young people without family support systems who need stable foundations to build upon</p>
+    </div>
+    <div class="serve-card">
+      <div class="serve-emoji">🎓</div>
+      <h3>Unemployed Youth (18–35)</h3>
+      <p>Educated or uneducated youth stuck in unemployment who need practical pathways to income</p>
+    </div>
+    <div class="serve-card">
+      <div class="serve-emoji">👩</div>
+      <h3>Low-Income Women & Single Mothers</h3>
+      <p>Women carrying economic and family responsibilities who need targeted economic empowerment</p>
+    </div>
+    <div class="serve-card">
+      <div class="serve-emoji">🏘️</div>
+      <h3>Marginalized Households</h3>
+      <p>Socially and economically excluded families who need systemic support to break the poverty cycle</p>
+    </div>
+    <div class="serve-card">
+      <div class="serve-emoji">🌱</div>
+      <h3>Future Cohorts</h3>
+      <p>As our model scales, we expand to reach more underserved communities across Rwanda and the region</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section reveal">
+  <blockquote>"Kimuntu Rising does not measure success by the number of trainings conducted — it measures success by the number of lives permanently transformed."</blockquote>
+  <cite>— Kimuntu Rising Mission Statement</cite>
+</div>
+
+<!-- PILOT -->
+<section class="pilot-section reveal" id="pilot">
+  <div class="section-label">Launch Phase</div>
+  <h2 class="section-title">The Pilot Program</h2>
+  <p class="section-sub">A focused, fundable proof-of-concept designed to demonstrate the Kimuntu Rising model at scale.</p>
+  <div class="pilot-inner">
+    <div>
+      <div class="section-label" style="color:var(--gold-light);">Program Overview</div>
+      <h3 class="section-title" style="color:var(--cream);font-size:1.8rem;">10 Beneficiaries<br>6 Months</h3>
+      <p>A tight, measurable pilot that proves the transformation model works — generating the evidence base needed for full-scale funding and replication.</p>
+      <div class="pilot-phases">
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <span><strong style="color:var(--cream);">Phase 1:</strong> Beneficiary selection and onboarding</span>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <span><strong style="color:var(--cream);">Month 1–2:</strong> Mindset transformation (Rise Mind Program)</span>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <span><strong style="color:var(--cream);">Month 2–4:</strong> Skills training + apprenticeship placement</span>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <span><strong style="color:var(--cream);">Month 4–6:</strong> Business incubation and income generation</span>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--green-light);"></div>
+          <span><strong style="color:var(--cream);">Ongoing:</strong> Mentorship, follow-up and performance tracking</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label" style="color:var(--gold-light); margin-bottom:1rem;">Pilot Budget</div>
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Budget Item</th>
+            <th>Cost (RWF)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Training Materials</td><td>300,000</td></tr>
+          <tr><td>Venue & Logistics</td><td>200,000</td></tr>
+          <tr><td>Trainers / Facilitators</td><td>400,000</td></tr>
+          <tr><td>Starter Kits (10 participants)</td><td>1,000,000</td></tr>
+          <tr><td>Mentorship & Follow-up</td><td>300,000</td></tr>
+          <tr><td>Administration</td><td>200,000</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>2,400,000 RWF</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="usd-note">≈ $2,000 USD — realistic, targeted, fully fundable</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal" id="contact">
+  <h2>Ready to Build<br>Something Lasting?</h2>
+  <p>Partner with Kimuntu Rising to fund transformation — not dependency. Every contribution builds financially independent individuals and job creators.</p>
+  <div class="cta-btns">
+    <a href="mailto:info@kimunturising.org" class="btn-dark">📧 Get In Touch</a>
+    <a href="#pilot" class="btn-white">View Pilot Budget</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="logo">Kimuntu<span style="color:var(--gold);"> Rising</span></span>
+    <p>A transformation engine for vulnerable individuals in Rwanda. Building self-reliant people and sustainable economic systems — from the ground up.</p>
+    <p style="margin-top:1rem;font-size:0.8rem;">📍 Kigali, Rwanda &nbsp;|&nbsp; 📧 info@kimunturising.org</p>
+  </div>
+  <div class="footer-col">
+    <h4>Organization</h4>
+    <ul>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#model">Our Model</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#impact">Impact</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Get Involved</h4>
+    <ul>
+      <li><a href="#contact">Partner With Us</a></li>
+      <li><a href="#contact">Fund a Pilot</a></li>
+      <li><a href="#contact">Become a Mentor</a></li>
+      <li><a href="#pilot">Funding Details</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 Kimuntu Rising. All rights reserved.</span>
+  <span>Built with purpose in <span>Kigali 🇷🇼</span></span>
+</div>
+
+<script>
+  // Navbar scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
